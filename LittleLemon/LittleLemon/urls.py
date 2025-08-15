@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from LittleLemonAPI.views import home_view
 
 urlpatterns = [
+    path('', home_view, name='home'),  # Page d'accueil
     path('admin/', admin.site.urls),
     path('api/', include('LittleLemonAPI.urls')),
     path('auth/', include('djoser.urls')),

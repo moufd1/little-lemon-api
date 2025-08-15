@@ -35,3 +35,22 @@ class IsOwnerOrManager(permissions.BasePermission):
         
         # Write permissions only to the owner or managers
         return obj.user == request.user or request.user.groups.filter(name='Manager').exists()
+
+class IsCustomer(permissions.BasePermission):
+    """
+    Permission to allow access only to customers (users not in Manager or Delivery crew groups).
+    """
+    def has_permission(self, request, view):
+        if request.user and request.user.is_authenticated:
+            return not (request.user.groups.filter(name='Manager').exists() or 
+                       request.user.groups.filter(name='Delivery crew').exists())
+        return False
+
+class IsDeliveryCrew(permissions.BasePermission):
+    """
+    Permission to allow access only to delivery crew members.
+    """
+    def has_permission(self, request, view):
+        if request.user and request.user.is_authenticated:
+            return request.user.groups.filter(name='Delivery crew').exists()
+        return False
