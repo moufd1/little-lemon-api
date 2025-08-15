@@ -1,0 +1,97 @@
+# Little Lemon API - Notes d'accès
+
+## Superuser (Admin)
+Username: admin
+Password: admin123
+
+## Utilisateurs de test
+
+### Managers
+- Username: manager1
+- Password: manager123
+
+### Delivery Crew
+- Username: delivery1
+- Password: delivery123
+
+### Customers
+- Username: customer1
+- Password: customer123
+
+- Username: customer2
+- Password: customer123
+
+## Instructions d'installation
+
+1. cd C:\Users\TRETEC\Desktop\little-lemon-api\LittleLemon
+2. pipenv install
+3. pipenv shell
+4. python manage.py makemigrations (FAIT)
+5. python manage.py migrate (FAIT)
+6. python manage.py create_groups (FAIT)
+7. python manage.py populate_data (FAIT)
+8. python manage.py create_test_users (FAIT)
+9. python manage.py createsuperuser (FAIT: admin/admin123456)
+10. python manage.py runserver
+
+IMPORTANT: Utiliser pipenv shell pour activer l'environnement virtuel avant de lancer les commandes Django.
+
+## Endpoints API
+
+### Authentification
+- POST /auth/users/ - Créer un utilisateur
+- POST /auth/token/login/ - Obtenir un token
+- POST /auth/token/logout/ - Se déconnecter
+
+### Menu Items
+- GET /api/menu-items/ - Lister les articles (tous les utilisateurs)
+- POST /api/menu-items/ - Créer un article (managers seulement)
+- GET /api/menu-items/{id}/ - Détail d'un article
+- PUT/PATCH /api/menu-items/{id}/ - Modifier un article (managers)
+- DELETE /api/menu-items/{id}/ - Supprimer un article (managers)
+
+### Categories
+- GET /api/categories/ - Lister les catégories
+- POST /api/categories/ - Créer une catégorie (managers)
+
+### User Groups
+- GET/POST /api/groups/manager/users/ - Gérer les managers
+- DELETE /api/groups/manager/users/{id}/ - Retirer un manager
+- GET/POST /api/groups/delivery-crew/users/ - Gérer l'équipe de livraison
+- DELETE /api/groups/delivery-crew/users/{id}/ - Retirer de l'équipe
+
+### Cart
+- GET /api/cart/menu-items/ - Voir le panier
+- POST /api/cart/menu-items/ - Ajouter au panier
+- DELETE /api/cart/menu-items/ - Vider le panier
+
+### Orders
+- GET /api/orders/ - Lister les commandes
+- POST /api/orders/ - Créer une commande
+- GET /api/orders/{id}/ - Détail d'une commande
+- PUT/PATCH /api/orders/{id}/ - Modifier une commande
+- DELETE /api/orders/{id}/ - Supprimer une commande (managers)
+
+## Fonctionnalités implémentées
+
+✅ 1. L'admin peut assigner des utilisateurs au groupe manager
+✅ 2. Accès au groupe manager avec token admin
+✅ 3. L'admin peut ajouter des articles de menu
+✅ 4. L'admin peut ajouter des catégories
+✅ 5. Les managers peuvent se connecter
+✅ 6. Les managers peuvent mettre à jour l'article du jour
+✅ 7. Les managers peuvent assigner des utilisateurs à l'équipe de livraison
+✅ 8. Les managers peuvent assigner des commandes à l'équipe de livraison
+✅ 9. L'équipe de livraison peut accéder aux commandes qui leur sont assignées
+✅ 10. L'équipe de livraison peut marquer une commande comme livrée
+✅ 11. Les clients peuvent s'enregistrer
+✅ 12. Les clients peuvent se connecter et obtenir des tokens
+✅ 13. Les clients peuvent parcourir toutes les catégories
+✅ 14. Les clients peuvent parcourir tous les articles de menu
+✅ 15. Les clients peuvent parcourir les articles par catégorie
+✅ 16. Les clients peuvent paginer les articles de menu
+✅ 17. Les clients peuvent trier les articles par prix
+✅ 18. Les clients peuvent ajouter des articles au panier
+✅ 19. Les clients peuvent accéder aux articles précédemment ajoutés au panier
+✅ 20. Les clients peuvent passer des commandes
+✅ 21. Les clients peuvent parcourir leurs propres commandes
